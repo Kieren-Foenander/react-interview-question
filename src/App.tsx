@@ -1,68 +1,17 @@
-import React, { ChangeEvent, FormEvent, FormHTMLAttributes, Key, useState } from "react"
-import { fetchWords } from "./api/FetchWords"
 
-interface synonym {
-  word: string
-  score: number
-}
+import { Route, Routes } from "react-router-dom"
+import './App.css'
+import WordGame from "./components/WordGame"
 
 function App() {
-  const [word, setWord] = useState<string>("")
-  const [synonyms, setSynonyms] = useState<synonym[]>([])
-
-  const handleWordChange = (e: any) => setWord(e.target.value)
-
-  const handleWordSubmit = (e: FormEvent) => {
-    e.preventDefault
-    fetchWords(word).then(setSynonyms)
-  }
-
-  const handleEnterClicked = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      e.preventDefault
-      e.stopPropagation
-      fetchWords(word).then(setSynonyms)
-      
-    }
-  }
-
-  const handleWordClicked = (e: any) => {
-    setWord(e.target.innerText)
-    fetchWords(word).then(setSynonyms)
-    console.log(synonyms)
-  }
 
   return (
     <>
-      <div className="container">
-        <h2>Type In a Word</h2>
-          <label htmlFor="word">Your Word </label>
-          <input
-            id="word"
-            type="text"
-            value={word}
-            onChange={handleWordChange}
-            onKeyDown={handleEnterClicked}
-          ></input>
-          <button type="submit" onClick={handleWordSubmit}>
-            Submit
-          </button>
-      </div>
-      <div className="container">
-        <ul>
-          {synonyms.map((words: synonym, i: Key) => {
-            return (
-              <li key={i} className="list" onClick={handleWordClicked}>
-                {words.word}
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      <Routes>
+        <Route path="/" element={ <WordGame />} />
+      </Routes>
     </>
   )
 }
 
 export default App
-
-//{word: 'hello', score: 2628}

@@ -51,3 +51,7 @@
 .list{
   list-style: none;
 }
+
+ul{
+  padding: 0 0 0 0;
+}
