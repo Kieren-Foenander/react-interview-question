@@ -1,4 +1,5 @@
 import React, { FormEvent, Key, useState } from "react"
+import { Link } from "react-router-dom"
 import { fetchWords } from "../api/WordApi"
 import '../App.css'
 
@@ -60,6 +61,8 @@ function WordGame() {
           })}
         </ul>
       </div>
+
+      <Link to="/">Back to Home</Link>
     </>
   )
 }

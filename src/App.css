@@ -26,11 +26,6 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
 .card {
   padding: 2em;
@@ -54,4 +49,33 @@
 
 ul{
   padding: 0 0 0 0;
+}
+
+.component-container{
+  border-style: solid;
+  border-radius: 3px;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 25px;
+}
+
+.components{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+a{
+  border-style: solid;
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+  border-color: white;
+  margin: 10px;
+}
+
+h3{
+  margin-top: 0;
+  margin-bottom: 30px;
 }
