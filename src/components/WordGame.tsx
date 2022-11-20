@@ -1,4 +1,4 @@
-import React, { FormEvent, Key, useState } from "react"
+import React, { FormEvent, Key, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { fetchWords } from "../api/WordApi"
 import '../App.css'
@@ -28,9 +28,9 @@ function WordGame() {
     }
   }
 
-  const handleWordClicked = (e: any) => {
+  const  handleWordClicked = async (e: any) => {
     setWord(e.target.innerText)
-    fetchWords(word).then(setSynonyms)
+    await fetchWords(word).then(setSynonyms)
     console.log(synonyms)
   }
 
