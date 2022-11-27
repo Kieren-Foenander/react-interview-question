@@ -1,9 +1,4 @@
-import React, { useState } from "react"
 import { Link } from "react-router-dom"
-
-const goToPage = (e: React.FormEvent) => {
-  e.preventDefault
-}
 
 export default function Home() {
   return (
