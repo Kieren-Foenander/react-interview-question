@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react"
 import "../App.css"
 
-export default function Circles() {
-  type circle = {
-    x: number
-    y: number
-  }
+type circle = {
+  x: number
+  y: number
+}
 
+export default function Circles() {
   const [circles, setCircles] = useState<circle[]>([])
-//   const [prevCircles, setPrevCircles] = useState<circle[]>([])
   const [redoCircles, setRedoCircles] = useState<circle[]>([])
 
   const generateCircle = (e: any) => {
@@ -21,21 +20,21 @@ export default function Circles() {
     }
 
     setCircles((current) => [...current, newCircle])
-    //setPrevCircles([...circles])
-    console.log(circles)
   }
 
   const handleUndo = (e: any) => {
     e.preventDefault()
-    setRedoCircles([...circles])
-    circles.pop()
-    const prevCircles: circle[] = circles
-    setCircles([...prevCircles])
+    const lastPopped = circles.pop()
+    if (!lastPopped) return
+    setRedoCircles([...redoCircles, lastPopped])
+    setCircles([...circles])
   }
 
   const handleRedo = (e: any) => {
     e.preventDefault()
-    setCircles([...redoCircles])
+    const redo = redoCircles.pop()
+    if (!redo) return
+    setCircles([...circles, redo])
   }
 
   return (
@@ -45,10 +44,11 @@ export default function Circles() {
         <button onClick={handleRedo}>redo</button>
       </div>
       <div className="background" onClick={generateCircle}>
-        {circles.map((i) => {
+        {circles.map((i, index) => {
           return (
             <div
               className="circle"
+              key={index}
               style={{ left: i.x, top: i.y, position: "absolute" }}
             ></div>
           )
