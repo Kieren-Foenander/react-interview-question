@@ -1,7 +1,7 @@
 import React, { FormEvent, Key, useState } from "react"
 import { Link } from "react-router-dom"
 import { fetchWords } from "../api/WordApi"
-import '../App.css'
+import "../App.css"
 
 interface synonym {
   word: string
@@ -11,8 +11,6 @@ interface synonym {
 function WordGame() {
   const [word, setWord] = useState<string>("")
   const [synonyms, setSynonyms] = useState<synonym[]>([])
-
-  const handleWordChange = (e: any) => setWord(e.target.value)
 
   const handleWordSubmit = (e: FormEvent) => {
     e.preventDefault
@@ -24,32 +22,30 @@ function WordGame() {
       e.preventDefault
       e.stopPropagation
       fetchWords(word).then(setSynonyms)
-      
     }
   }
 
-  const  handleWordClicked = async (e: any) => {
+  const handleWordClicked = (e: any) => {
+    setWord(e.target.innerText)
+    fetchWords(e.target.innerText).then(setSynonyms)
     
-    await fetchWords(word).then(setSynonyms)
-    await setWord(e.target.innerText)
-    console.log(synonyms)
   }
 
   return (
     <>
       <div className="container">
         <h2>Type In a Word</h2>
-          <label htmlFor="word">Your Word </label>
-          <input
-            id="word"
-            type="text"
-            value={word}
-            onChange={handleWordChange}
-            onKeyDown={handleEnterClicked}
-          ></input>
-          <button type="submit" onClick={handleWordSubmit}>
-            Submit
-          </button>
+        <label htmlFor="word">Your Word </label>
+        <input
+          id="word"
+          type="text"
+          value={word}
+          onChange={(e) => {setWord(e.target.value)}}
+          onKeyDown={handleEnterClicked}
+        ></input>
+        <button type="submit" onClick={handleWordSubmit}>
+          Submit
+        </button>
       </div>
       <div className="container">
         <ul>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import "../App.css"
 
 type circle = {
@@ -40,6 +41,7 @@ export default function Circles() {
   return (
     <>
       <div className="top-corner-buttons">
+        <Link to="/">Back to Home</Link>
         <button onClick={handleUndo}>undo</button>
         <button onClick={handleRedo}>redo</button>
       </div>
